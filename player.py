@@ -26,13 +26,13 @@ class Player(object):
         return "%i-%s" % (self.index, self.name)
 
     def __eq__(self, other):
-        return self.index == other.index and self.name == other.name
+        return self.index == other.index # and self.name == other.name
 
     def __ne__(self, other):
-        return self.index != other.index or self.name != other.name
+        return self.index != other.index # or self.name != other.name
 
     def __hash__(self):
-        return hash(self.index) ^ hash(self.name)
+        return hash(self.index) # ^ hash(self.name)
 
 
 class Bot(Player):
