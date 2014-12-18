@@ -71,7 +71,7 @@ class Simpleton(Bot):
     def _vote(self, team):
         """This is a hook for providing more complex voting once logical
         reasoning has been performed."""
-        return True
+        return random.choice([True, True, True, False])
 
     def onMissionComplete(self, sabotaged):
         before = len(self.configurations)
