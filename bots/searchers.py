@@ -188,7 +188,6 @@ class Reasonable(invalidator.Invalidator):
     def vote(self, team):
         v, data = self._simulateAndPickBest('vote', [True, False], samples=1000)
         self.log.debug("VOTES: %r" % data)
-        print('VOTES', data)
         return v
 
     def sabotage(self):

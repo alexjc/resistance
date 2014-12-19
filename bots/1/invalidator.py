@@ -77,7 +77,7 @@ class Invalidator(Bot):
             
             if self.game.tries == 5:
                 # self.log.info("Voting up the last mission because Resistance would.")
-                return random.choice([True, False])
+                return False
 
             if len(team) == 3:
                 # self.log.info("Voting strongly about this team because it's size 3!")
@@ -143,14 +143,14 @@ class Invalidator(Bot):
                 matches.append(config)
         if not scores:
             # self.log.info("No configuration matches this selection!")
-            return False
+            return random.choice([False, True])
 
         # Establish whether this meets the criteria for selection...
         score = min(scores)
         threshold = min(self.invalidations.values())
         if score <= threshold:
             # self.log.info("This selection scores %s under threshold %f." % (scores, threshold))
-            return True
+            return random.choice([True, True, True, False])
         else:
             # self.log.info("This selection scores %s above threshold %0.2f." % (scores, threshold))
             # for config in matches:
@@ -158,7 +158,7 @@ class Invalidator(Bot):
                 # for s, f in self.factors[config]:
                 #   self.log.info("  %0.2f - %s" % (s, f))
             # self.log.info("Options for Resistance were:\n%s" % ("\n".join(["  %s = %0.2f (%i)" % (str(self.getResistance(c)), t, len(self.factors[c])) for c, t in self.invalidations.items() if t == threshold])))
-            return False
+            return random.choice([False, False, False, True])
 
     def onVoteComplete(self, votes):
         for config in self.invalidations:
