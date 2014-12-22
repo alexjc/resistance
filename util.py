@@ -45,12 +45,13 @@ class Variable(object):
 
     def __repr__(self):
         if self.samples:
+            # return self.detail()            
             value = 100.0 * float(self.total) / float(self.samples)
             if value == 100.0:
                 return "100.%"
-            return "{:4.1f}%".format(value)
+            return "{:4.1f}% {:d}".format(value, self.samples)
         else:
-            return "   N/A"
+            return " N/A "
 
     def __cmp__(self, other):
         return cmp(self.estimate(), other.estimate())

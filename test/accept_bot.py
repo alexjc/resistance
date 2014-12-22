@@ -4,7 +4,7 @@ import random
 from player import Player
 from game import State
 
-from bots.searchers import Sensible
+from bots.searchers import Reasonable
 from bots.beginners import RandomBot
 
 
@@ -13,7 +13,7 @@ class TestResistance(unittest.TestCase):
     def setUp(self):
         self.players = [Player('Random', i+1) for i in range(5)]
 
-        self.bot = Sensible('Bot', 1, spy=False)
+        self.bot = Reasonable('Bot', 1, spy=False)
         self.bot.onGameRevealed(self.players, set())
 
     def __test_VoteApproveLastTry(self):
@@ -63,7 +63,7 @@ class TestSpy(unittest.TestCase):
     def setUp(self):
         self.players = [Player('Random', i+1) for i in range(5)]
 
-        self.bot = Sensible('Bot', 1, spy=True)
+        self.bot = Reasonable('Bot', 1, spy=True)
         self.bot.onGameRevealed(self.players, self.players[0:2])
 
     def __test_SabotageToWin(self):

@@ -9,7 +9,7 @@ from util import Variable
 
 import beginners
 import validators
-import intermediate
+import intermediates
 import invalidator
 
 
@@ -60,8 +60,8 @@ class Opponent(object):
     def __call__(self, *args):
         return self
 
-intermediate.Simpleton.clone = Opponent.__dict__['clone']
-intermediate.Simpleton.__call__ = Opponent.__dict__['__call__']
+intermediates.Simpleton.clone = Opponent.__dict__['clone']
+intermediates.Simpleton.__call__ = Opponent.__dict__['__call__']
 
 beginners.RandomBot.clone = Opponent.__dict__['clone']
 beginners.RandomBot.__call__ = Opponent.__dict__['__call__']
@@ -82,7 +82,7 @@ class Reasonable(invalidator.Invalidator):
     def onGameRevealed(self, players, spies):
         self.spies = spies
 
-        self.opponents = [invalidator.Invalidator(self.game, i, False) for i in range(1,6)]
+        self.opponents = [invalidator.Invalidator(self.game, i, False) for i in range(5)]
         self.runner = Runner(self.opponents, [False] * 5)
 
         self._onCallback('onGameRevealed', players, spies)
@@ -140,7 +140,7 @@ class Reasonable(invalidator.Invalidator):
                 assert o.spy is not None
             self.runner.bots = [o.clone() for o in self.opponents]
 
-            me = self.runner.bots[self.index-1]
+            me = self.runner.bots[self.index]
             original = getattr(me, cmd)
             setattr(me, cmd, decider)
 
@@ -149,7 +149,7 @@ class Reasonable(invalidator.Invalidator):
 
             for b in self.runner.bots:
                 b.spy = bool(b.index in [s.index for s in spies])
-            assert self.runner.bots[self.index-1].spy == self.spy
+            assert self.runner.bots[self.index].spy == self.spy
 
             self.runner.simulate(self.game)
             # print(move[0], spies, self.runner.state)
